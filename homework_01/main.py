@@ -45,4 +45,9 @@ def filter_numbers(list_numbers, filter_type=PRIME):
                     temp_list_number.append(number)
         return temp_list_number
 
-print(filter_numbers([3, 5, 7, 9, 11], PRIME))
+def is_prime(x):
+    return 2 in [x, 2 ** x % x]
+
+#print(filter_numbers([3, 5, 7, 9, 11], PRIME))
+
+print(is_prime(4))
