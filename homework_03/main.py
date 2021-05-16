@@ -49,9 +49,7 @@ async def async_main():
             if t_post["userId"] == t_user["id"]:
                 posts.append(post)
         user.posts = posts
-        add_row_in_table(user)
-
-
+        await add_row_in_table(user)
 
 def main():
     asyncio.get_event_loop().run_until_complete(async_main())
