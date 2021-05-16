@@ -9,8 +9,6 @@
 """
 
 import os
-import asyncio
-import sqlalchemy
 from sqlalchemy import (
     Column,
     Integer,
@@ -24,9 +22,10 @@ from sqlalchemy.orm import (
     relationship, sessionmaker
 )
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:secretpassword@localhost/postgres"
 engine = create_async_engine(PG_CONN_URI)
 Base = declarative_base()
+async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 class User(Base):
     __tablename__ = "users"
@@ -53,7 +52,7 @@ async def create_tables():
 
 
 async def add_row_in_table(value):
-    async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+
     async with async_session() as session:
         async with session.begin():
             session.add(value)

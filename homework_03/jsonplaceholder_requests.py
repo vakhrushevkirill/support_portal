@@ -21,7 +21,6 @@ async def get_users_and_posts():
         get_resource_body(USERS_DATA_URL),
         get_resource_body(POSTS_DATA_URL)
     )
-    print(str(res))
 
 def get_resource(url_resource):
     loop = asyncio.get_event_loop()
