@@ -22,7 +22,7 @@ from sqlalchemy.orm import (
     relationship, sessionmaker
 )
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:secretpassword@localhost/postgres"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres"
 engine = create_async_engine(PG_CONN_URI)
 Base = declarative_base()
 Session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
@@ -44,16 +44,4 @@ class Post(Base):
     body = Column(String, nullable=False)
     user = relationship("User", back_populates="posts")
 
-
-async def create_tables():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
-
-
-async def add_row_in_table(value):
-    async with Session() as session:
-        async with session.begin():
-            session.add(value)
-        await session.commit()
 

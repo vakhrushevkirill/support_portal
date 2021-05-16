@@ -14,10 +14,11 @@
 """
 import asyncio
 from models import (
-    create_tables,
+    Session,
     User,
     Post,
-    add_row_in_table
+    Base,
+    engine
 )
 import json
 from jsonplaceholder_requests import (
@@ -25,6 +26,20 @@ from jsonplaceholder_requests import (
     USERS_DATA_URL,
     POSTS_DATA_URL
 )
+
+
+async def create_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
+
+async def add_row_in_table(value):
+    async with Session() as session:
+        async with session.begin():
+            session.add(value)
+        await session.commit()
+
 
 async def async_main():
     await create_tables()
