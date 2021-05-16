@@ -20,7 +20,6 @@ from models import (
     Base,
     engine
 )
-import json
 from jsonplaceholder_requests import (
     get_resource_body,
     USERS_DATA_URL,
@@ -43,28 +42,31 @@ async def add_row_in_table(value):
 
 async def async_main():
     await create_tables()
-    res = await asyncio.gather(
+    users_data, posts_data = await asyncio.gather(
         get_resource_body(USERS_DATA_URL),
         get_resource_body(POSTS_DATA_URL),
-        return_exceptions=True
     )
-    j_users = json.loads(res[0])
-    j_posts = json.loads(res[1])
-    for t_user in j_users:
+
+    await add_users(users_data)
+    await add_posts(posts_data)
+
+
+async def add_users(users_data):
+    for t_user in users_data:
         user = User(id=t_user["id"],
                     name=t_user["name"],
                     username=t_user["username"],
                     email=t_user["email"])
-
-        posts = list()
-        for t_post in j_posts:
-            post = Post(user_id = t_post["userId"],
-                        title=t_post["title"],
-                        body=t_post["body"])
-            if t_post["userId"] == t_user["id"]:
-                posts.append(post)
-        user.posts = posts
         await add_row_in_table(user)
+
+
+async def add_posts(posts_data):
+    for t_post in posts_data:
+        post = Post(user_id = t_post["userId"],
+                    title=t_post["title"],
+                    body=t_post["body"])
+        await add_row_in_table(post)
+
 
 def main():
     asyncio.get_event_loop().run_until_complete(async_main())
