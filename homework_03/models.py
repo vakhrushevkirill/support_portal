@@ -27,6 +27,7 @@ engine = create_async_engine(PG_CONN_URI)
 Base = declarative_base()
 Session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
+
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
