@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+  Add Users
+{% endblock %}
+
+{% block body %}
+  <div>
+    <h1>Добавить нового пользователя</h1>
+    <form method="post">
+      <label id="label-input-user-name" for="input-user-name">Имя пользователя:</label>
+      <input
+        id="input-user-name"
+        name="user-name"
+        type="text"
+        placeholder="Имя пользователя"
+        required
+      >
+      <button type="submit">Добавить</button>
+    </form>
+  </div>
+  <br>
+  <br>
+  <div>
+    <a href="{{ url_for('users_app.list') }}">Вернутся к списку пользователей</a>
+  </div>
+
+  <script>
+
+    const submitUser = document.querySelector('button[type="submit"]')
+    console.log('submit button:', submitUser)
+    submitUser.disabled = 'disabled'
+    const userInput = document.getElementById('input-user-name')
+    userInput.addEventListener('input', function () {
+      submitUser.disabled = !userInput.value
+    })
+  </script>
+{% endblock %}

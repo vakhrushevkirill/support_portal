@@ -1,0 +1,16 @@
+FROM python:3.9.5-buster
+WORKDIR /web-app
+RUN pip install -U pip
+RUN pip install -U setuptools wheel
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
+COPY ./pyproject.toml ./
+COPY ./poetry.lock ./
+RUN poetry install --no-interaction --no-ansi
+COPY . .
+EXPOSE 5000/tcp
+ENV FLASK_ENV=production
+ENV FLASK_DEBUG=1
+RUN chmod +x entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]
+CMD [ "flask", "run", "--host=0.0.0.0"]

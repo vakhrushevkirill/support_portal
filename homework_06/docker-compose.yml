@@ -1,0 +1,33 @@
+#Версия докера
+#postgresql://web_admin:secret@localhost:5432/web-app
+version: "3"
+
+#Список сервисов
+services:
+    web-app:
+        build:
+            dockerfile: ./Dockerfile
+            context: ./web-app
+        environment: 
+            SQLALCHEMY_DATABASE_URI: postgresql://web_admin:secret@pg:5432/web-app
+        ports:
+            - 5000:5000
+        depends_on: 
+            - pg
+
+    #Имя нашего сервиса
+    pg:
+        #Какой образ использовать
+        image: postgres:11
+        #Переменные окружения
+        environment: 
+            POSTGRES_DB: "web-app"
+            POSTGRES_USER: "web_admin"
+            POSTGRES_PASSWORD: "secret"
+        #Значения
+        volumes:
+            #Перенаправление записи БД 
+            - ./pg-data:/var/lib/postgresql/data
+        #Маршрутизация портов
+        ports:
+            - 5433:5432
