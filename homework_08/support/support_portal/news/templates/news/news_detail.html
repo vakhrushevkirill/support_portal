@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ news.title }}</h1>
+    <div>Описание: {{ news.description}}</div>
+    <div>Время создания: {{ news.create_on}}</div>
+    <div>Автор: {{ news.author_id}}</div>
+
+    <p><form method="GET" action="{% url 'news' %}">
+        <button type="submit">Вернутся к списку</button>
+    </form></p>
+    
+{% endblock %}
