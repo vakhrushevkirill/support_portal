@@ -47,16 +47,8 @@ class YourTestClass(TestCase):
             title = 'Заголовок',
             description = 'dsfdsfsdfdsfdsf',
             text = 'models.TextField()',
-            create_on = timezone.now(),
+            create_on = 'timezone.now()',
             commetns_count = 0,
             author_id = UserPortal.objects.create_user("UserTest2Other")
             )
         
-    # def test_false_is_true(self):
-    #     print("Method: test_false_is_true.")
-    #     self.assertTrue()
-
-    # def test_one_plus_one_equals_two(self):
-    #     print("Method: test_one_plus_one_equals_two.")
-    #     self.assertEqual(1 + 1, 'daf')
-
