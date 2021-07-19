@@ -2,6 +2,9 @@ language: python
 script:
   - pytest
 before_install:
-- pip install poetry
-install:
-- poetry install
+  - pip install poetry
+script:
+  - poetry config settings.virtualenvs.in-project true
+  - poetry install
+  - cd support_portal
+  - poetry run python manage.py test
