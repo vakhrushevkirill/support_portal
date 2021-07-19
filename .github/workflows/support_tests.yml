@@ -27,4 +27,5 @@ jobs:
         poetry install
     - name: Test with django_test
       run: |
-        poetry run python support_portal/manage.py test
+        cd support_portal
+        poetry run python manage.py test
