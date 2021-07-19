@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
@@ -6,15 +8,15 @@ from .models import News
 from .forms import AddNewsForm
 from django.utils import timezone
 
-class NewsList(ListView):
+class NewsList(LoginRequiredMixin, ListView):
     model = News
     context_object_name = 'news_list'
     template_name = 'news/news_list.html' 
 
-class NewsDetailView(DetailView):
+class NewsDetailView(LoginRequiredMixin, DetailView):
     model = News
 
-
+@login_required()
 def index(request):
     num_news = News.objects.all().count()
     return render(
@@ -23,6 +25,7 @@ def index(request):
         context={'num_news':num_news}
     )
 
+@login_required()
 def add_news(request):
     if request.method == 'POST':
         form = AddNewsForm(request.POST)

@@ -8,7 +8,7 @@
     <ul class="list-group">
       {% for news in news_list %}
       
-      <a href="{{ news.id }}"><li class="list-group-item">{{ news.title }}</a> ({{news.create_on}})</li>
+      <a href="{{ news.id }}"><li class="list-group-item">{{ news.id }}.{{ news.title }}</a> ({{news.create_on}})</li>
       {% endfor %}
 
     </ul>
