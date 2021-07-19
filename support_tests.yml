@@ -1,6 +1,10 @@
 name: Run tests for support
 
-on: [push]
+on:
+  push:
+    branches: [ tests_actions ]
+  pull_request:
+    branches: [ tests_actions ]
 
 jobs:
   homework-tests:
