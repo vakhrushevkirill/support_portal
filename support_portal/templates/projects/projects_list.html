@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Проекты участника {{member_name}}</h1>
+
+    {% if projects_list %}
+    <ul class="list-group">
+      {% for project in projects_list %}
+      
+      <a href="{{ project.id }}"><li class="list-group-item">{{ project.сhapter_project }}</a></li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Проектов нет</p>
+    {% endif %} 
+{% endblock %}

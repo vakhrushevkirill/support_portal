@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Участники</h1>
+
+    {% if members_list %}
+    <ul class="list-group">
+      {% for member in members_list %}
+      
+      <a href="{{ member.id }}"><li class="list-group-item">{{ member.name_short }}</a></li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Участников нет</p>
+    {% endif %} 
+{% endblock %}
