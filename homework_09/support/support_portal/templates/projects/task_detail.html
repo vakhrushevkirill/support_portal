@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1><b>{{ task.name }}</b></h1>
+    <div>Время создания: {{ task.create_on}}</div>
+    <div>Автор: {{ task.author_id}}</div>
+    <div>Проект: {{ task.project}}</div>
+    <div>Статус: {{ task.status_task}}</div>
+    <div><p><i>{{ task.text}}</i></p></div>
+    <p>Вложение: {{ task.attachment}}</p>
+    
+    
+{% endblock %}
