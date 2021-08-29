@@ -60,7 +60,7 @@ def create_task(request, pk1, pk2):
         form = CreateTaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
-            task.author_id = request.user
+            task.author_id = request.user.id
             task.create_on = timezone.now()
             task.project = Project.objects.filter(pk=pk2).last()
             task.save()

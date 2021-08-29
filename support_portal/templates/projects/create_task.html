@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}<title>Создать задачу</title>{% endblock %}
 {% block content %}
     <h1>Создать задачу pk2{{pk1}} pk2{{pk2}}</h1>
     <form method="POST" class="post-form">{% csrf_token %}
