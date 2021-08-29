@@ -9,4 +9,4 @@ class News(models.Model):
     text = models.TextField()
     create_on = models.TimeField(default=0)
     commetns_count = models.IntegerField(null=True)
-    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING, default=0)
+    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING)
