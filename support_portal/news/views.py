@@ -34,7 +34,7 @@ def add_news(request):
             news.author_id = request.user
             news.create_on = timezone.now()
             news.save()
-            return redirect('news-detail', pk=news.pk)
+            return redirect('news_detail', pk=news.pk)
     else:
         form = AddNewsForm()
     return render(

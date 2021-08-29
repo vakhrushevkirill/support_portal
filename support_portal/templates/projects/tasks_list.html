@@ -2,7 +2,6 @@
 {% block title %}<title>Задачи</title>{% endblock %}
 {% block content %}
     <h1>Задачи в проекте {{project_name}} участника {{member_name}}</h1>
-    <h1>Задачи в проекте {{project_pk}} участника {{member_pk}}</h1>
 
     <a href="{% url 'create_task' pk1=member_pk pk2=project_pk %}">Создать задачу</a>
     

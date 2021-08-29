@@ -60,15 +60,16 @@ def create_task(request, pk1, pk2):
         form = CreateTaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
-            task.author_id = request.user.id
+            task.author_id = request.user
             task.create_on = timezone.now()
             task.project = Project.objects.filter(pk=pk2).last()
+            task.status_task=StatusTask.objects.all().first()
             task.save()
-            return redirect('tasks_detail')
+            return redirect('task_detail', member_pk=pk1, project_pk=pk2, pk=task.pk)
     else:
         form = CreateTaskForm()
     return render(
         request,
         'projects/create_task.html',
-        {'form':form, 'pk1':pk1,'pk2':request}
+        {'form':form, 'pk1':pk1,'pk2':pk2}
     )

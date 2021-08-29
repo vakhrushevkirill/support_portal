@@ -19,7 +19,7 @@ class StatusTask(models.Model):
 class Member(models.Model):
     name_short = models.CharField(max_length=100)
     name_full = models.CharField(max_length=200)
-    member_status = models.ForeignKey(StatusMember, on_delete=models.DO_NOTHING, default=0)
+    member_status = models.ForeignKey(StatusMember, on_delete=models.DO_NOTHING)
 
     def display_status(self):
         return self.member_status
@@ -29,7 +29,7 @@ class Member(models.Model):
 
 class Project(models.Model):
     сhapter_project = models.CharField(max_length=200)
-    member_owner = models.ForeignKey(Member, on_delete=models.DO_NOTHING, default=0)
+    member_owner = models.ForeignKey(Member, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return f'{self.member_owner}.{self.сhapter_project}'
@@ -40,9 +40,9 @@ class Task(models.Model):
     create_on = models.TimeField(default=timezone.now)
     commetns_count = models.IntegerField(blank=True, null=True)
     attachment = models.FileField(upload_to='uploads/%Y/%m/%d/',blank=True, null=True)
-    status_task = models.ForeignKey(StatusTask, on_delete=models.DO_NOTHING, default=0)
-    project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, default=0)
-    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING, default=0)
+    status_task = models.ForeignKey(StatusTask, on_delete=models.DO_NOTHING)
+    project = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
+    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name
@@ -50,4 +50,4 @@ class Task(models.Model):
 class Comment(models.Model):
     text = models.TextField()
     task = models.ForeignKey(Task, on_delete=models.DO_NOTHING)
-    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING, default=0)
+    author_id = models.ForeignKey(UserPortal, on_delete=models.DO_NOTHING)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}<title>Создать задачу</title>{% endblock %}
 {% block content %}
-    <h1>Создать задачу pk2{{pk1}} pk2{{pk2}}</h1>
+    <h1>Создать задачу</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Заголовок</label>{{ form.name }}
